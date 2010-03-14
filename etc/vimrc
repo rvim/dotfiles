@@ -9,7 +9,6 @@ set bs=indent,eol,start		" allow backspacing over everything in insert mode
 set viminfo='20,\"50	" read/write a .viminfo file, don't store more
 			" than 50 lines of registers
 set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
@@ -47,8 +46,11 @@ endif
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
+  set background=dark
+  syntax on   " syntax highlighting
+  " colorscheme murphy
+  colorscheme darkblue
+  set hlsearch    " highlight search
 endif
 
 filetype plugin on
@@ -62,3 +64,75 @@ endif
 " Don't wake up system with blinking cursor:
 " http://www.linuxpowertop.org/known.php
 let &guicursor = &guicursor . ",a:blinkon0"
+
+
+" Indenting *******************************************************************
+set ai " Automatically set the indent of a new line (local to buffer)
+set si " smartindent (local to buffer)
+"Cambiar los tabulados a cuatro espacios en blanco, 
+" usar 4 espacios para la autoindentación,
+" reemplazar los caracteres tabulado por espacios
+" y redondear la indentación y el desplazamiento de bloques a
+" múltiplos de 'shiftwidth'
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set shiftround
+
+" Scrollbars  ******************************************************************
+set sidescrolloff=2
+set numberwidth=4
+
+" Windows *********************************************************************
+set equalalways " Multiple windows, when created, are equal in size
+set splitbelow splitright
+  
+"Vertical split then hop to new buffer
+:noremap ,v :vsp^M^W^W<cr>
+:noremap ,h :split^M^W^W<cr>
+
+
+" Cursor highlights ***********************************************************
+set cursorline
+"set cursorcolumn
+
+" Searching *******************************************************************
+set incsearch " incremental search, search as you type
+set ignorecase " Ignore case when searching
+set smartcase " Ignore case when searching lowercase
+
+
+" Status Line *****************************************************************
+set showcmd
+set ruler  " show the cursor position all the time
+"set ch=2 " Make command line two lines high
+"match LongLineWarning '\%120v.*' " Error format when a line is longer than 120
+
+
+" Inser New Line **************************************************************
+"map <S-Enter> O<ESC> " awesome, inserts new line without going into insert mode
+"map <Enter> o<ESC>
+set fo-=r " do not insert a comment leader after an enter, (no work, fix!!)
+ 
+" Omni Completion *************************************************************
+autocmd FileType html :set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+" May require ruby compiled in
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete 
+
+
+" Misc ************************************************************************
+set backspace=indent,eol,start
+set number " Show line numbers
+set matchpairs+=<:>
+"set vb t_vb= " Turn off bell, this could be more annoying, but I'm not sure how
+
+" Mouse ***********************************************************************
+set mouse=a " Enable the mouse
+"behave xterm
+set selectmode=mouse
