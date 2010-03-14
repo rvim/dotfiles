@@ -1,0 +1,58 @@
+#caption always "%{yK} $LOGNAME | %{yK}%c |  %{yK}%-Lw%{yK}%50>%{Ky}%n%f* %t%{-}%+Lw%<%{- Wk}"
+caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD, %d de %LM - %c"
+termcapinfo rxvt ti@:te@
+
+#bindkey -k F9 command
+
+# bind F10 to Screen's quit command
+#bindkey -k F9 quit
+
+escape ^Oo			#Cambia la tecla de escape
+#escape F9			#Cambia la tecla de escape
+#Previene la secuencia C^a s (Freeze)
+bind s
+##################
+## some basic stuff
+crlf off                        # no thanks.                            #
+startup_message off             # don't want this either.               #
+defscrollback 15000              # please sir, can i have some more?     #
+defutf8 on
+utf8 on
+#shell -$SHELL                  # i'll take my default shell.           #
+defmonitor on                   # turn monitoring on                    #
+activity "%"                    # tell me when stuff happens!           #
+vbell off			# stupid attempts of tab-completion
+
+
+#################
+## Prepend/append register [/] to the paste if ^a^] is pressed.
+# This lets me have autoindent modes in vi(m).
+#register [ "\033:se paste\015a"
+#register ] "\033:se nopaste\015a"
+#bind ^] paste [.]
+
+
+#################
+##ctrl+left or ctrl+right to switch screens
+#aterm bindings
+#bindkey "^[[c" next
+#bindkey "^[[d" prev
+#bindkey "^[Oc" next
+#bindkey "^[Od" prev
+
+#putty bindings
+#bindkey "^[OC" next
+#bindkey "^[OD" prev
+
+#some other term, don't remember which
+#bindkey "^[[5C" next
+#bindkey "^[[5D" prev
+
+
+##################
+### Let's do some bindings.
+##################
+bind G screen -t 'Google' w3m www.google.com      #
+#bind M screen -t 'Mail' mutt                        #
+#bind F screen -t 'Fetchmail' fetchmail              #
+#bind C screen -t 'CENTERICQ' centericq             #
